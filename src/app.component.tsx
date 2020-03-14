@@ -12,7 +12,7 @@ export class App extends React.Component {
   render(): JSX.Element {
     return (
       <React.Fragment>
-        <h2>Search</h2>
+        <h2 id="search-header">Search For Album</h2>
         <Search subject$={this.search$} />
         <h2>Results</h2>
         <AlbumContainer search$={this.search$.pipe()}></AlbumContainer>

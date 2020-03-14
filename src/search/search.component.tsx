@@ -1,3 +1,5 @@
+import './search.component.css';
+
 import * as React from 'react';
 import { Subject } from 'rxjs';
 
@@ -7,6 +9,8 @@ export class Search extends React.Component<{ subject$: Subject<string> }> {
   }
 
   render(): JSX.Element {
-    return <input onChange={this.onSearchInput.bind(this)}></input>;
+    return (
+      <input aria-labelledby="search-header" className="SearchInput" onChange={this.onSearchInput.bind(this)}></input>
+    );
   }
 }

@@ -1,5 +1,6 @@
 .Album {
   background-color: var(--NON-COMPLIANT-light);
+  cursor: pointer;
   display: flex;
   margin: 10px;
   padding: 10px 5px;
@@ -22,6 +23,7 @@
   font-size: 14px;
   order: 2;
   margin-left: 10px;
+  width: 200px;
 }
 
 .AlbumTitle, .AlbumReleaseDate {
