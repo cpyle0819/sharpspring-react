@@ -1,13 +1,13 @@
 import * as React from 'react';
-import { Subject } from 'rxjs';
-import { takeUntil, debounceTime } from 'rxjs/operators';
+import { Subject, from } from 'rxjs';
+import { takeUntil, debounceTime, filter, switchMap, map } from 'rxjs/operators';
 
 import { Album, AlbumData } from 'src/album/album.component';
 import { Search } from 'src/search/search.component';
 
 export class App extends React.Component<{}, { albums: AlbumData[] }> {
   state = {
-    albums: [{ name: 'An Evening Wasted with Tom Lehrer', artist: 'Tom Lehrer', releaseDate: '1959', imgUrl: '' }],
+    albums: [],
   };
 
   private search$ = new Subject<string>();
@@ -18,8 +18,17 @@ export class App extends React.Component<{}, { albums: AlbumData[] }> {
   }
 
   componentDidMount() {
-    this.search$.pipe(debounceTime(300), takeUntil(this.unsubscribe$)).subscribe(() => {
-      // make API call here and set albums
+    this.search$.pipe(debounceTime(300), takeUntil(this.unsubscribe$)).subscribe(term => {
+      const req = new Request(`https://itunes.apple.com/search?term=${encodeURIComponent(term)}&entity=album`);
+      from(fetch(req))
+        .pipe(
+          filter<Response>(res => res.ok),
+          switchMap(res => res.json()),
+          map((resultsJSON: { resultCount: number; results: AlbumData[] }) => resultsJSON.results),
+        )
+        .subscribe(albums => {
+          this.setState({ albums });
+        });
     });
   }
 
