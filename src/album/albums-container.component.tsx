@@ -1,3 +1,5 @@
+import './albums-container.component.css';
+
 import * as React from 'react';
 import { Observable, Subject, from } from 'rxjs';
 import { debounceTime, takeUntil, filter, switchMap, map } from 'rxjs/operators';
@@ -31,6 +33,12 @@ export class AlbumContainer extends React.Component<{ search$: Observable<string
   }
 
   render() {
-    return this.state.albums.map((alb, i) => <Album key={i} {...alb} />);
+    return (
+      <div className="AlbumsContainer">
+        {this.state.albums.map((alb, i) => (
+          <Album key={i} {...alb} />
+        ))}
+      </div>
+    );
   }
 }

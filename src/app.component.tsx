@@ -1,5 +1,7 @@
+import './app.component.css';
+
 import * as React from 'react';
-import { Subject, from } from 'rxjs';
+import { Subject } from 'rxjs';
 
 import { AlbumContainer } from 'src/album/albums-container.component';
 import { Search } from 'src/search/search.component';
@@ -10,7 +12,9 @@ export class App extends React.Component {
   render(): JSX.Element {
     return (
       <React.Fragment>
+        <h2>Search</h2>
         <Search subject$={this.search$} />
+        <h2>Results</h2>
         <AlbumContainer search$={this.search$.pipe()}></AlbumContainer>
       </React.Fragment>
     );

@@ -1,0 +1,29 @@
+.Album {
+  background-color: var(--NON-COMPLIANT-light);
+  display: flex;
+  margin: 10px;
+  padding: 10px 5px;
+  width: 300px;
+}
+
+.AlbumArtist {
+  color: var(--color-light);
+  margin-top: 5px;
+}
+
+.AlbumArtwork {
+  border-radius: 5px;
+  height: 100px;
+  order: 1;
+  width: 100px;
+}
+
+.AlbumMeta {
+  font-size: 14px;
+  order: 2;
+  margin-left: 10px;
+}
+
+.AlbumTitle, .AlbumReleaseDate {
+  color: var(--color-dark);
+}
